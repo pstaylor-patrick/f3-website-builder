@@ -1,0 +1,22 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Workout {
+  id              String     @id @default(uuid())
+  name            String
+  location        String
+  mapsUrl         String
+  schedule        String
+  eventType       String
+  sortOrder       Int        @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  @@map("workouts")
+  @@unique([sortOrder])
+}
